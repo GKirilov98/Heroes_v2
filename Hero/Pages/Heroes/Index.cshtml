@@ -1,0 +1,74 @@
+﻿@page
+@model Hero.Pages.Heroes.IndexModel
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center">Merchant</h1>
+
+<hr class="hr-3" />
+<table class="table bg-blur">
+	<thead>
+		<tr>
+			<th scope="col" class="font-weight-bold">
+				@Html.DisplayNameFor(model => model.HeroE[0].Name)
+			</th>
+			<th scope="col">
+				@Html.DisplayNameFor(model => model.HeroE[0].Gender)
+			</th>
+			<th scope="col">
+				@Html.DisplayNameFor(model => model.HeroE[0].Level)
+			</th>
+			<th scope="col">
+				@Html.DisplayNameFor(model => model.HeroE[0].Stamina)
+			</th>
+			<th scope="col">
+				@Html.DisplayNameFor(model => model.HeroE[0].Strength)
+			</th>
+			<th scope="col">
+				@Html.DisplayNameFor(model => model.HeroE[0].Attack)
+			</th>
+			<th scope="col">
+				@Html.DisplayNameFor(model => model.HeroE[0].Deffence)
+			</th>
+			<th scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.HeroE)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Gender)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Level)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Stamina)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Strength)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Attack)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Deffence)
+				</td>
+				<td>
+					@if (Program.currUser.Username.Equals("Admin"))
+					{
+						<a asp-page="./Edit" asp-route-id="@item.HeroEId" class="btn btn-warning">Edit</a>
+						<a asp-page="./Details" asp-route-id="@item.HeroEId" class="btn btn-info">Details</a>
+						<a asp-page="./Delete" asp-route-id="@item.HeroEId" class="btn btn-dark">Delete</a>
+					}
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

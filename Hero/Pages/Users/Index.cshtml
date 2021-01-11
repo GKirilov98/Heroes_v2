@@ -1,0 +1,54 @@
+﻿@page
+@model Hero.Pages.Users.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>List User</h1>
+
+<table class="table bg-blur">
+    <thead>
+        <tr>
+            <th scope="col" class="font-weight-bold">
+                @Html.DisplayNameFor(model => model.User[0].Username)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.User[0].Password)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.User[0].Email)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.User[0].HeroEId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.User) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HeroEId)
+            </td>
+			<td>
+				@if (Program.currUser.Username.Equals("Admin"))
+				{
+					<a asp-page="./Edit" asp-route-id="@item.UserId" class="btn btn-warning">Edit</a>
+					<a asp-page="./Details" asp-route-id="@item.UserId" class="btn btn-info">Details</a>
+					<a asp-page="./Delete" asp-route-id="@item.UserId" class="btn btn-dark">Delete</a>
+				}
+			</td>
+        </tr>
+}
+    </tbody>
+</table>

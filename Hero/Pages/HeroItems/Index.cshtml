@@ -1,0 +1,40 @@
+﻿@page
+@model Hero.Pages.HeroItems.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+<table class="table bg-blur">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HeroItem[0].HeroE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeroItem[0].Item)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.HeroItem) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HeroE.HeroEId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item.ItemId)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.HeroItemId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.HeroItemId">Details</a> |
+              
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,106 @@
+﻿
+@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>@ViewData["Title"] - Hero</title>
+
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" />
+	<link rel="stylesheet" href="~/css/style.css" type="text/css">
+</head>
+<body>
+	<header>
+		<nav class="navbar bg-dark navbar-expand-lg navbar-background bg-dark ">
+			<a class="navbar-brand text-white h4" href="/">Heroes</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+					aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+				<ul class="navbar-nav row">
+
+					@if (Program.currUser == null)
+					{
+						<li class="nav-item col-md-4">
+							<a class="nav-link text-white active h5" href="/Index">Home</a>
+						</li>
+						<li class="nav-item col-md-4">
+							<a class="nav-link text-white active h5" href="/Users/Login">Login</a>
+						</li>
+						<li class="nav-item col-md-4">
+							<a class="nav-link text-white active h5" href="/Users/Create">Register</a>
+						</li>
+					}
+					else
+					{
+						if (Program.currHero == null)
+						{
+							<li class="nav-item mr-2">
+								<a class="nav-link text-white active h5" href="/Heroes/Create">Create hero</a>
+							</li>
+
+						}
+						else
+						{
+							<li class="nav-item mr-2">
+								<a class="nav-link text-white active h5" href="/Items/Index">Merchant</a>
+							</li>
+
+							<li class="nav-item mr-2">
+								@*<a class="nav-link text-white active h5" href="/Heroes/Details">Hero</a>*@
+								<a asp-page="/Heroes/Details" asp-route-id="@Program.currUser.HeroEId" class="nav-link text-white active h5">Hero</a>
+							</li>
+							<li class="nav-item mr-2">
+								@*<a class="nav-link text-white active h5" href="/Users/Details">Profile</a>*@
+								<a asp-page="/Users/Details" asp-route-id="@Program.currUser.UserId" class="nav-link text-white active h5">Profile</a>
+							</li>
+						}
+
+						@if (Program.currUser.Username.Equals("Admin"))
+						{
+							<li class="nav-item mr-2">
+								<a class="nav-link text-white active h5" href="/Items/Create">!Create Item!</a>
+							</li>
+							<li class="nav-item mr-2">
+								<a class="nav-link text-white active h5" href="/Heroes/Index">!List Heroes!</a>
+							</li>
+							<li class="nav-item mr-2">
+								<a class="nav-link text-white active h5" href="/Users/Index">!List Users!</a>
+							</li>
+
+							<li class="nav-item mr-2">
+								<a class="nav-link text-white active h5" href="/Admin/ListAll">!List All!</a>
+							</li>
+						}
+
+						<li class="nav-item mr-2">
+							<a class="nav-link text-white active h5" href="/Users/Logout">Logout</a>
+						</li>
+					}
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<div class="container">
+		<main role="main" class="pb-3">
+			@RenderBody()
+		</main>
+	</div>
+
+	<footer class="border-top footer text-muted">
+		<div class="container">
+			&copy; 2020 - Hero - <a asp-area="" asp-page="/Privacy">Privacy</a>
+		</div>
+	</footer>
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+
+	@RenderSection("Scripts", required: false)
+</body>
+</html>

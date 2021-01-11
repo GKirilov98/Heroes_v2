@@ -1,0 +1,47 @@
+﻿@page
+@model Hero.Pages.Heroes.FightModel
+@{
+}
+
+@using Hero.Entities;
+<div class="container">
+	<div class="text-center bg-blur">
+		<h1>Fight</h1>
+		<div>
+			<div class="row">
+				<div class="col-md-4">
+					@if (Model.attackHero.Gender.Equals(Gender.Male))
+					{
+						<img src="/img/male.jpg" alt="photo" class="align-middle" width="150px" height="250" />
+					}
+					else
+					{
+						<img src="/img/female.jpg" alt="photo" class="align-middle" width="150px" height="250" />
+					}
+
+
+					<h3 class="align-middle">@Model.attackHero.Name</h3>
+					<h3 class="align-middle">@Model.attackerPoints</h3>
+				</div>
+				<div class="col-md-4">
+					<h2>VS</h2>
+					<h2 >@Model.winner</h2>
+					<a class="btn btn-info" href="/Index">Back to Arena</a>
+				</div>
+				<div class="col-md-4">
+					@if (Model.deffenceHero.Gender.Equals(Gender.Male))
+					{
+						<img src="/img/male.jpg" alt="photo" class="align-middle" width="150px" height="250" />
+					}
+					else
+					{
+						<img src="/img/female.jpg" alt="photo" class="align-middle" width="150px" height="250" />
+					}
+
+
+					<h3 class="align-middle">@Model.deffenceHero.Name</h3>
+					<h3 class="align-middle">@Model.deffenderPoints</h3>
+				</div>
+			</div>
+		</div>
+	</div>

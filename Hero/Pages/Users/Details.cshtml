@@ -1,0 +1,54 @@
+﻿@page
+@model Hero.Pages.Users.DetailsModel
+
+@{
+	ViewData["Title"] = "Details";
+}
+
+@using Hero.Entities;
+<div class="container">
+	<div class="text-center">
+		<h1>Profile</h1>
+		<div class="bg-blur">
+			<div class="row flex-md-row">
+				<div class="col col-md-6">
+					<h2>Username</h2>
+					<h2>@Model.User.Username</h2>
+				</div>
+				@if (Model.User.HeroEId != null)
+				{
+					<div class="col col-md-6">
+						<h2>Hero</h2>
+						<h2>@Model.User.HeroE.Name</h2>
+					</div>
+				}
+
+			</div>
+			<div class="row flex-md-row mt-3">
+				<div class="col col-md-6">
+					<h2>Email</h2>
+					<h2>@Model.User.Email</h2>
+				</div>
+				<div class="col col-md-6">
+					@if (Model.User.HeroEId != null)
+					{
+						@if (Model.User.HeroE.Gender.Equals(Gender.Male))
+						{
+							<img src="/img/male.jpg" class="border border-secondary"
+								 height="250" alt="image">
+						}
+						else
+						{
+							<img src="/img/female.jpg" class="border border-secondary"
+								 height="250" alt="image">
+						}
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="button-holder d-flex justify-content-center mb-5 mt-1">
+		<a class="btn btn-info text-white mb-3" href="/Index">Back to Home </a>
+	</div>
+</div>
+

@@ -1,0 +1,64 @@
+﻿@page
+@model Hero.Pages.Heroes.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="text-center">Edit Hero</h1>
+<hr class="hr-3" />
+<div class="row">
+    <div class="mx-auto col-md-4 bg-blur">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="HeroE.HeroEId" />
+            <div class="form-group">
+                <label asp-for="HeroE.Name" class="label-holder text-white d-flex justify-content-center h3 mb-2"></label>
+                <input asp-for="HeroE.Name" class="form-control" />
+                <span asp-validation-for="HeroE.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display: none;">
+                <label asp-for="HeroE.Gender" class="label-holder text-white d-flex justify-content-center h3 mb-2"></label>
+                <select asp-for="HeroE.Gender" class="form-control"></select>
+                <span asp-validation-for="HeroE.Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HeroE.Level" class="label-holder text-white d-flex justify-content-center h3 mb-2"></label>
+                <input asp-for="HeroE.Level" class="form-control" />
+                <span asp-validation-for="HeroE.Level" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HeroE.Stamina" class="label-holder text-white d-flex justify-content-center h3 mb-2"></label>
+                <input asp-for="HeroE.Stamina" class="form-control" />
+                <span asp-validation-for="HeroE.Stamina" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HeroE.Strength" class="label-holder text-white d-flex justify-content-center h3 mb-2"></label>
+                <input asp-for="HeroE.Strength" class="form-control" />
+                <span asp-validation-for="HeroE.Strength" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HeroE.Attack" class="label-holder text-white d-flex justify-content-center h3 mb-2"></label>
+                <input asp-for="HeroE.Attack" class="form-control" />
+                <span asp-validation-for="HeroE.Attack" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HeroE.Deffence" class="label-holder text-white d-flex justify-content-center h3 mb-2"></label>
+                <input asp-for="HeroE.Deffence" class="form-control" />
+                <span asp-validation-for="HeroE.Deffence" class="text-danger"></span>
+            </div>
+           
+			<div class="button-holder d-flex justify-content-center">
+				<input type="submit" value="Save" class="btn btn-primary text-white col-8" />
+			</div>
+        </form>
+    </div>
+</div>
+
+<div>
+	<a class="btn btn-dark" asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

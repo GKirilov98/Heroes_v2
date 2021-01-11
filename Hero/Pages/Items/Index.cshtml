@@ -1,0 +1,146 @@
+﻿@page
+@model Hero.Pages.Items.IndexModel
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+
+<h1 class="text-center">Merchant</h1>
+<hr class="hr-3" />
+<table class="table bg-blur">
+	<thead>
+		<tr>
+			<th scope="col" class="font-weight-bold">
+				@Html.DisplayNameFor(model => model.Item[0].Name)
+			</th>
+			<th scope="col">
+				@Html.DisplayNameFor(model => model.Item[0].Slot)
+			</th>
+			<th scope="col">
+				@Html.DisplayNameFor(model => model.Item[0].Stamina)
+			</th>
+			<th scope="col">
+				@Html.DisplayNameFor(model => model.Item[0].Strength)
+			</th>
+			<th scope="col">
+				@Html.DisplayNameFor(model => model.Item[0].Attack)
+			</th>
+			<th scope="col">
+				@Html.DisplayNameFor(model => model.Item[0].Defence)
+			</th>
+			<th scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.Item)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Slot.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Stamina)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Strength)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Attack)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Defence)
+				</td>
+				<td>
+					@{
+						bool usedItem = false;
+
+						foreach (var heroItem in Model.BuyedHeroItems)
+						{
+							if (heroItem.ItemId.Equals(item.ItemId))
+							{
+								usedItem = true;
+								break;
+							}
+						}
+
+						if (!usedItem)
+						{
+										<form method="post">
+											@*<input type="hidden" asp-for="" value="@item.ItemId" id="buyItem" />*@
+											<input type="hidden" asp-for="@item.ItemId" class="form-control" id="buyItem" name="buyItem" />
+											<button type="submit" class="btn btn-info">Buy</button>
+											@if (Program.currUser.Username.Equals("Admin"))
+											{
+												<a asp-page="./Edit" asp-route-id="@item.ItemId" class="btn btn-warning">Edit</a>
+												<a asp-page="./Delete" asp-route-id="@item.ItemId" class="btn btn-dark">Delete</a>
+											}
+										</form>
+						}
+						else
+						{
+							bool canSell = false;
+							Guid heroItemId = new Guid();
+							foreach (var ui in Model.usedItems)
+							{
+								if (ui.ItemId.Equals(item.ItemId))
+								{
+									canSell = true;
+									heroItemId = ui.HeroItemId;
+									break;
+								}
+							}
+
+							if (canSell)
+							{
+				<form method="post">
+					@*<input type="hidden" asp-for="" value="@item.ItemId" id="buyItem" />*@
+					<input type="hidden" asp-for="@heroItemId" class="form-control" id="sellItem" name="sellItem" />
+					<button type="submit" class="btn btn-danger">Sell</button>
+					@if (Program.currUser.Username.Equals("Admin"))
+					{
+						<a asp-page="./Edit" asp-route-id="@item.ItemId" class="btn btn-warning">Edit</a>
+						<a asp-page="./Delete" asp-route-id="@item.ItemId" class="btn btn-dark">Delete</a>
+					}
+				</form>
+							}
+						}
+
+
+
+					}
+
+
+
+
+					@*<a asp-page="./Edit" asp-route-id="@item.ItemId">Edit</a> |
+						<a asp-page="./Details" asp-route-id="@item.ItemId">Details</a> |
+						<a asp-page="./Delete" asp-route-id="@item.ItemId">Delete</a>*@
+				</td>
+			</tr>
+		}
+
+		@*<th:block th:each="item : ${itemList}">
+				<tr>
+					<td th:text="${item.name}"></td>
+					<td th:text="${item.slot}"></td>
+					<td th:text="${item.stamina}"></td>
+					<td th:text="${item.strength}"></td>
+					<td th:text="${item.attack}"></td>
+					<td th:text="${item.defence}"></td>
+					<th:block th:if="${item.bought == false}">
+						<td>
+							<form th:action="@{/items/merchant/{name}(name= ${item.name})}" th:method="post">
+								<button class="btn btn-info">Buy</button>
+							</form>
+						</td>
+					</th:block>
+				</tr>
+			</th:block>*@
+
+	</tbody>
+</table>
+

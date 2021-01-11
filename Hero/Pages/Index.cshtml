@@ -1,0 +1,68 @@
+﻿@page
+@model IndexModel
+@{
+	ViewData["Title"] = "Home page";
+}
+
+@using Hero.Entities;
+
+@if (Program.currUser == null)
+{
+	<div class="container">
+		<h1>Welcome to Victorious Arena</h1>
+		<hr class="my-3" />
+		<p class="h4">The most furious arena on the web</p>
+		<p class="h4">You will find many strong enemies but only the best will survive</p>
+		<hr class="my-3" />
+		<h3>
+			<a href="/Users/Login">Login</a> if you have an account or
+			<a href="/Users/Create">Register</a> now and meet the greatest heroes of all time.
+		</h3>
+	</div>
+}
+else
+{
+
+	<div class="text-center mb-3">
+		<h4 class="text-white mt-2">Welcome to the arena, @Program.currUser.Username !</h4>
+	</div>
+	<hr class="my-3" />
+	<div class="container">
+		@if (Program.currHero == null)
+		{
+			<div class="text-center">
+				<h2>@Program.currUser.Username, you don't have a hero. Click below and create one.</h2>
+				<a href="/Heroes/Create" class="btn btn-secondary">Create hero</a>
+			</div>
+		}
+		else
+		{
+			<div class="text-center">
+				<h2>You are ready! Choose hero to begin epic battle!</h2>
+			</div>
+			@foreach (var hero in Model.Heroes)
+			{
+	
+		<div class="row flex-md-row m-2">
+			<div class="col text-center">
+				@if (hero.Gender.Equals(Gender.Male))
+				{
+					<img src="/img/male.jpg" alt="photo" class="align-middle" width="150" />
+				}
+				else
+				{
+					<img src="/img/female.jpg" alt="photo" class="align-middle" width="150" />
+				}
+				<h2 class="text-white">@hero.Name</h2>
+				<a class="btn btn-danger" asp-page="./Heroes/Fight" asp-route-id="@hero.HeroEId">Fight</a> |
+			</div>
+		</div>
+	
+	<div class="mb-5"></div>
+	<div class="mb-3"></div>
+		}
+
+		}
+	</div>
+}
+
